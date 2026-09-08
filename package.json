@@ -1,0 +1,29 @@
+{
+  "name": "doorlight-a2a-mvp",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --names api,web --prefix \"[{name}]\" \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "UV_CACHE_DIR=/tmp/doorlight-uv-cache uv run uvicorn backend.app:app --host 127.0.0.1 --port 3001 --reload",
+    "dev:web": "vite --host 127.0.0.1 --configLoader runner",
+    "build": "tsc --noEmit && vite build --configLoader runner",
+    "test:api": "UV_CACHE_DIR=/tmp/doorlight-uv-cache uv run pytest"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.2",
+    "vite": "^7.0.0"
+  }
+}
